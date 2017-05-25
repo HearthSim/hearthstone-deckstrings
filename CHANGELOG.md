@@ -6,4 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Changelog (http://keepachangelog.com/)
 
+### Fixed
+- Fix a decoding bug
+
 [Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v0.1.0...HEAD

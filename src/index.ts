@@ -79,7 +79,7 @@ export function decode(deckstring: string): DeckDefinition {
 
 	const cards = [];
 	for (let i = 1; i <= 3; i++) {
-		for (let i = 0, c = reader.nextVarint(); i < c; i++) {
+		for (let j = 0, c = reader.nextVarint(); j < c; j++) {
 			cards.push([reader.nextVarint(), (i === 1 || i === 2) ? i : reader.nextVarint()]);
 		}
 	}
