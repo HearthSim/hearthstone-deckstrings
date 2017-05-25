@@ -1,0 +1,34 @@
+{
+  "name": "deckstrings",
+  "version": "0.0.0",
+  "description": "Decode and encode Hearthstone Deckstrings",
+  "keywords": [
+    "hearthstone",
+    "deckstrings"
+  ],
+  "homepage": "https://github.com/HearthSim/npm-deckstrings#readme",
+  "bugs": {
+    "url": "https://github.com/HearthSim/npm-deckstrings/issues"
+  },
+  "license": "ISC",
+  "author": "Benedict Etzel <benedict@hearthsim.net>",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HearthSim/npm-deckstrings.git"
+  },
+  "scripts": {
+    "prepublishOnly": "tsc",
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.22",
+    "typescript": "^2.3.3"
+  },
+  "dependencies": {
+    "atob": "^2.0.3",
+    "btoa": "^1.1.2",
+    "varint": "^5.0.0"
+  }
+}

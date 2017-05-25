@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"stripInternal": true,
+		"target": "es5",
+		"lib": [
+			"DOM",
+			"es6"
+		],
+		"outDir": "dist/",
+		"moduleResolution": "node",
+		"isolatedModules": false,
+		"noImplicitAny": false,
+		"removeComments": false,
+		"noLib": false,
+		"sourceMap": false
+	}
+}
