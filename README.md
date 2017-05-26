@@ -15,7 +15,7 @@ yarn add deckstrings
 ## Usage
 
 ```javascript
-import {encode, decode} from "deckstrings"
+import {encode, decode} from "deckstrings";
 
 const deck = {
 	cards: [[1, 3], [2, 3], [3, 3], [4, 3]], // [dbfid, count] pairs
