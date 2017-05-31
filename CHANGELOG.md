@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - encode: Skip counts with 0
 - encode: Verify parameters more strictly
 
+### Fixed
+- decode: Fix invalid deckstring version message
+
 ## [0.1.1] - 2017-05-25
 ### Added
 - Changelog (http://keepachangelog.com/)

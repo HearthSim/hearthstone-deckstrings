@@ -101,8 +101,9 @@ export function decode(deckstring: string): DeckDefinition {
 		throw new Error("Invalid deckstring");
 	}
 
-	if (reader.nextVarint() !== DECKSTRING_VERSION) {
-		throw new Error(`Unsupported deckstring version {$version}`);
+	const version = reader.nextVarint();
+	if (version !== DECKSTRING_VERSION) {
+		throw new Error(`Unsupported deckstring version ${version}`);
 	}
 
 	const format = reader.nextVarint();
