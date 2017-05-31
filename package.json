@@ -20,10 +20,13 @@
   "scripts": {
     "prepublishOnly": "tsc",
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test": "tsc && mocha"
   },
   "devDependencies": {
     "@types/node": "^7.0.22",
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2",
     "typescript": "^2.3.3"
   },
   "dependencies": {
