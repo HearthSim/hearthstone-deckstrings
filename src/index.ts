@@ -13,6 +13,9 @@ function trisort_cards(cards): any {
 	for (const tuple of cards) {
 		let list;
 		const [card, count] = tuple;
+		if (count === 0) {
+			continue;
+		}
 		if (count === 1) {
 			list = single;
 		}

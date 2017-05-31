@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Tests (using Mocha and Chai)
 
+### Changed
+- encode: Skip counts with 0
+
 ## [0.1.1] - 2017-05-25
 ### Added
 - Changelog (http://keepachangelog.com/)
