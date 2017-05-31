@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - encode: Skip counts with 0
+- encode: Verify parameters more strictly
 
 ## [0.1.1] - 2017-05-25
 ### Added

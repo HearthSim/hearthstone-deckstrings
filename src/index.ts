@@ -8,11 +8,29 @@ export interface DeckDefinition {
 
 const DECKSTRING_VERSION = 1;
 
+function verifyDbfId(id: any, name?: string): void {
+	name = name ? name : "dbf id";
+	if (!isPositiveNaturalNumber(id)) {
+		throw new Error(`Invalid ${name} ${id} (expected valid dbf id)`);
+	}
+}
+
+function isPositiveNaturalNumber(n: any): boolean {
+	if (typeof n !== "number" || !isFinite(n)) {
+		return false;
+	}
+	if (Math.floor(n) !== n) {
+		return false;
+	}
+	return n > 0;
+}
+
 function trisort_cards(cards): any {
 	const single = [], double = [], n = [];
 	for (const tuple of cards) {
 		let list;
 		const [card, count] = tuple;
+		verifyDbfId(card, "card");
 		if (count === 0) {
 			continue;
 		}
@@ -22,8 +40,11 @@ function trisort_cards(cards): any {
 		else if (count === 2) {
 			list = double;
 		}
-		else {
+		else if (isPositiveNaturalNumber(count)) {
 			list = n;
+		}
+		else {
+			throw new Error(`Invalid count ${count} (expected positive natural number)`);
 		}
 		list.push(tuple);
 	}
@@ -35,17 +56,31 @@ function trisort_cards(cards): any {
 }
 
 export function encode(deck: DeckDefinition): string {
+	if (
+		typeof deck !== "object" ||
+		(deck.format !== 1 && deck.format !== 2) ||
+		!Array.isArray(deck.heroes) ||
+		!Array.isArray(deck.cards)
+	) {
+		throw new Error("Invalid deck definition");
+	}
+
 	const writer = new BufferWriter();
+
+	const format = deck.format;
+	const heroes = deck.heroes;
+	const cards = deck.cards;
 
 	writer.null();
 	writer.varint(DECKSTRING_VERSION);
-	writer.varint(deck.format);
-	writer.varint(deck.heroes.length);
-	for (let hero of deck.heroes) {
+	writer.varint(format);
+	writer.varint(heroes.length);
+	for (let hero of heroes) {
+		verifyDbfId(hero, "hero");
 		writer.varint(hero);
 	}
 
-	for (let list of trisort_cards(deck.cards)) {
+	for (let list of trisort_cards(cards)) {
 		writer.varint(list.length);
 		for (let tuple of list) {
 			const [card, count] = tuple;
