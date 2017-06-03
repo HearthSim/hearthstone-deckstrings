@@ -1,6 +1,6 @@
 # Hearthstone Deckstrings
-[![npm](https://img.shields.io/npm/v/deckstrings.svg)](http://npmjs.com/package/deckstrings)
 [![Travis](https://img.shields.io/travis/HearthSim/npm-deckstrings/master.svg)](https://travis-ci.org/HearthSim/npm-deckstrings)
+[![npm](https://img.shields.io/npm/v/deckstrings.svg)](http://npmjs.com/package/deckstrings)
 
 Decode and encode Hearthstone [Deckstrings](https://hearthsim.info/docs/deckstrings/).
 
