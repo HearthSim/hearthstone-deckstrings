@@ -14,5 +14,8 @@
 		"removeComments": false,
 		"noLib": false,
 		"sourceMap": false
-	}
+	},
+	"include": [
+		"src"
+	]
 }
