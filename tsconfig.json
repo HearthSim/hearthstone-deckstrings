@@ -7,7 +7,7 @@
 			"DOM",
 			"es6"
 		],
-		"outDir": "dist/",
+		"outDir": "lib/",
 		"moduleResolution": "node",
 		"isolatedModules": false,
 		"noImplicitAny": false,

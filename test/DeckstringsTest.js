@@ -1,4 +1,4 @@
-const {encode, decode} = require("../dist/index");
+const {encode, decode} = require("../lib/index");
 const {expect} = require("chai");
 
 const EXAMPLE_DECKSTRING = "AAECAR8GxwPJBLsFmQfZB/gIDI0B2AGoArUDhwSSBe0G6wfbCe0JgQr+DAA=";

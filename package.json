@@ -12,7 +12,7 @@
   },
   "license": "ISC",
   "author": "Benedict Etzel <benedict@hearthsim.net>",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HearthSim/npm-deckstrings.git"
