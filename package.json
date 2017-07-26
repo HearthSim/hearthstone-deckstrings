@@ -33,13 +33,11 @@
     "rollup": "^0.45.2",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-jscc": "^0.3.3",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-watch": "^4.3.1",
     "typescript": "^2.3.3",
     "varint": "^5.0.0"
-  },
-  "dependencies": {
-    "rollup-plugin-jscc": "^0.3.3"
   }
 }
