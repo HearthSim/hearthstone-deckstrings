@@ -31,7 +31,7 @@ export default [
 		entry: "src/index.ts",
 		moduleName: "deckstrings",
 		dest: pkg.browser,
-		format: "iife",
+		format: "umd",
 		plugins: [
 			jscc({
 				values: {
