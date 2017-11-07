@@ -24,7 +24,7 @@ export default [
 					_PLATFORM: "node",
 				},
 				extensions: [".js", ".ts"],
-			})
+			}),
 		].concat(plugins),
 	},
 	{
@@ -38,7 +38,7 @@ export default [
 					_PLATFORM: "web",
 				},
 				extensions: [".js", ".ts"],
-			})
+			}),
 		].concat(plugins),
 	},
 ];

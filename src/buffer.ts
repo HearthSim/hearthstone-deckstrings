@@ -51,7 +51,7 @@ export class BufferReader extends Iterator {
 		const binary = atob(string);
 		const buffer = new Uint8Array(binary.length);
 		for (let i = 0; i < binary.length; i++) {
-			buffer[i] = binary.charCodeAt(i)
+			buffer[i] = binary.charCodeAt(i);
 		}
 		this.buffer = buffer;
 	}

@@ -1,4 +1,4 @@
-import {BufferReader, BufferWriter} from "./buffer";
+import { BufferReader, BufferWriter } from "./buffer";
 
 export interface DeckDefinition {
 	cards: number[];
@@ -26,7 +26,9 @@ function isPositiveNaturalNumber(n: any): boolean {
 }
 
 function trisort_cards(cards): any {
-	const single = [], double = [], n = [];
+	const single = [],
+		double = [],
+		n = [];
 	for (const tuple of cards) {
 		let list;
 		const [card, count] = tuple;
@@ -36,23 +38,18 @@ function trisort_cards(cards): any {
 		}
 		if (count === 1) {
 			list = single;
-		}
-		else if (count === 2) {
+		} else if (count === 2) {
 			list = double;
-		}
-		else if (isPositiveNaturalNumber(count)) {
+		} else if (isPositiveNaturalNumber(count)) {
 			list = n;
-		}
-		else {
-			throw new Error(`Invalid count ${count} (expected positive natural number)`);
+		} else {
+			throw new Error(
+				`Invalid count ${count} (expected positive natural number)`
+			);
 		}
 		list.push(tuple);
 	}
-	return [
-		single,
-		double,
-		n,
-	];
+	return [single, double, n];
 }
 
 export function encode(deck: DeckDefinition): string {
@@ -119,7 +116,10 @@ export function decode(deckstring: string): DeckDefinition {
 	const cards = [];
 	for (let i = 1; i <= 3; i++) {
 		for (let j = 0, c = reader.nextVarint(); j < c; j++) {
-			cards.push([reader.nextVarint(), (i === 1 || i === 2) ? i : reader.nextVarint()]);
+			cards.push([
+				reader.nextVarint(),
+				i === 1 || i === 2 ? i : reader.nextVarint(),
+			]);
 		}
 	}
 

@@ -1,7 +1,8 @@
-const {encode, decode} = require("../lib/index");
-const {expect} = require("chai");
+const { encode, decode } = require("../lib/index");
+const { expect } = require("chai");
 
-const EXAMPLE_DECKSTRING = "AAECAR8GxwPJBLsFmQfZB/gIDI0B2AGoArUDhwSSBe0G6wfbCe0JgQr+DAA=";
+const EXAMPLE_DECKSTRING =
+	"AAECAR8GxwPJBLsFmQfZB/gIDI0B2AGoArUDhwSSBe0G6wfbCe0JgQr+DAA=";
 
 const EXAMPLE_DEFINITION = {
 	cards: [
@@ -29,7 +30,6 @@ const EXAMPLE_DEFINITION = {
 };
 
 describe("#encode", () => {
-
 	describe("with a valid deck definition", () => {
 		let result;
 
@@ -46,55 +46,100 @@ describe("#encode", () => {
 		expect(() => encode(477)).to.throw();
 		expect(() => encode("somestring")).to.throw();
 		expect(() => encode([1, 2, 3])).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {heroes: null}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: null }))
+		).to.throw();
 	});
 
 	it("should throw an error when format is not 1 or 2", () => {
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {format: "1"}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {format: 3}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {format: [1]}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { format: "1" }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { format: 3 }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { format: [1] }))
+		).to.throw();
 	});
 
 	it("should throw an error when heroes is not an array", () => {
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {heroes: 42}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {heroes: "[]"}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: 42 }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: "[]" }))
+		).to.throw();
 	});
 
 	it("should throw an error when heroes contains an invalid dbf id", () => {
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {heroes: ["a"]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {heroes: [42, "a"]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {heroes: [42, "1"]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {heroes: [-42]}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: ["a"] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: [42, "a"] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: [42, "1"] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: [-42] }))
+		).to.throw();
 	});
 
 	it("should throw an error when cards is not an array", () => {
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: 2}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: "[]"}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: 2 }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: "[]" }))
+		).to.throw();
 	});
 
 	it("should throw an error when cards contains a non-tuples", () => {
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [3]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[1, 2], 3]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: ["a"]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[1, "a"]]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [["a", 1]]}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [3] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, 2], 3] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: ["a"] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, "a"]] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [["a", 1]] }))
+		).to.throw();
 	});
 
 	it("should throw an error when cards contains an invalid dbf id", () => {
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[-4, 1]]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[NaN, 1]]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[Infinity, 1]]}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[-4, 1]] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[NaN, 1]] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[Infinity, 1]] }))
+		).to.throw();
 	});
 
 	it("should throw an error when cards contains an invalid count", () => {
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[1, -5]]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[1, NaN]]}))).to.throw();
-		expect(() => encode(Object.assign({}, EXAMPLE_DEFINITION, {cards: [[1, Infinity]]}))).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, -5]] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, NaN]] }))
+		).to.throw();
+		expect(() =>
+			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, Infinity]] }))
+		).to.throw();
 	});
 });
 
 describe("#decode", () => {
-
 	it("should throw an error when the parameter is an empty string", () => {
 		expect(() => decode("")).to.throw();
 	});

@@ -22,7 +22,9 @@
     "prepublishOnly": "rollup -c",
     "build": "rollup -c",
     "dev": "rollup -cw",
-    "test": "rollup -c && mocha"
+    "test": "rollup -c && mocha",
+    "format": "prettier --write \"{src/**/*.ts,test/**/*.js,*.js,*.ts}\"",
+    "lint": "prettier --list-different \"{src/**/*.ts,test/**/*.js,*.js,*.ts}\""
   },
   "devDependencies": {
     "@types/node": "^7.0.22",
@@ -30,6 +32,7 @@
     "btoa": "^1.1.2",
     "chai": "^4.0.0",
     "mocha": "^3.4.2",
+    "prettier": "^1.8.1",
     "rollup": "^0.45.2",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",

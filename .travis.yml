@@ -3,6 +3,7 @@ node_js:
 - '7'
 script:
 - yarn test
+- yarn lint
 deploy:
   - provider: npm
     email: benedict@hearthsim.net
