@@ -1,8 +1,6 @@
 import varint from "varint";
-//#if _PLATFORM == "node"
 import atob from "atob";
 import btoa from "btoa";
-//#endif
 
 /** @internal */
 export class Iterator {
