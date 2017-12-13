@@ -2,14 +2,14 @@
 [![Travis](https://img.shields.io/travis/HearthSim/npm-deckstrings/master.svg)](https://travis-ci.org/HearthSim/npm-deckstrings)
 [![npm](https://img.shields.io/npm/v/deckstrings.svg)](http://npmjs.com/package/deckstrings)
 
-Decode and encode Hearthstone [Deckstrings](https://hearthsim.info/docs/deckstrings/).
+Decode and encode Hearthstone [deckstrings](https://hearthsim.info/docs/deckstrings/).
 
 ## Install
 
 Install the package from npm using your favourite package manager:
 
 ```
-yarn add deckstrings
+$ yarn add deckstrings
 ```
 
 ## Usage
