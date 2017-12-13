@@ -1,7 +1,7 @@
 import { BufferReader, BufferWriter } from "./buffer";
 
 export interface DeckDefinition {
-	cards: number[];
+	cards: [number, number][]; // [dbfId, count]
 	heroes: number[];
 	format: 1 | 2;
 }
