@@ -42,5 +42,6 @@
     "typescript": "^2.7.1",
     "varint": "^5.0.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "sideEffects": false
 }
