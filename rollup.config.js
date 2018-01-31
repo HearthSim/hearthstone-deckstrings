@@ -6,8 +6,8 @@ import pkg from "./package.json";
 export default [
 	{
 		input: "src/index.ts",
-		name: "deckstrings",
 		output: {
+			name: "deckstrings",
 			file: pkg.main,
 			format: "umd",
 		},

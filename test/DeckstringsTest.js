@@ -101,7 +101,9 @@ describe("#encode", () => {
 			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [3] }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, 2], 3] }))
+			encode(
+				Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, 2], 3] })
+			)
 		).to.throw();
 		expect(() =>
 			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: ["a"] }))
@@ -122,7 +124,11 @@ describe("#encode", () => {
 			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[NaN, 1]] }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[Infinity, 1]] }))
+			encode(
+				Object.assign({}, EXAMPLE_DEFINITION, {
+					cards: [[Infinity, 1]],
+				})
+			)
 		).to.throw();
 	});
 
@@ -134,7 +140,11 @@ describe("#encode", () => {
 			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, NaN]] }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, Infinity]] }))
+			encode(
+				Object.assign({}, EXAMPLE_DEFINITION, {
+					cards: [[1, Infinity]],
+				})
+			)
 		).to.throw();
 	});
 });
