@@ -4,6 +4,11 @@
 
 Decode and encode Hearthstone [deckstrings](https://hearthsim.info/docs/deckstrings/).
 
+Any deckstring or deck definition returned by this library will be canonical.
+This means that the cards and heroes are sorted in ascending order by dbf id.
+
+A mapping between dbf ids and cards can be found at [HearthstoneJSON](https://hearthstonejson.com/).
+
 ## Install
 
 Install the package from npm using your favourite package manager:
