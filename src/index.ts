@@ -25,7 +25,11 @@ function isPositiveNaturalNumber(n: any): boolean {
 	return n > 0;
 }
 
-function trisort_cards(cards): any {
+function sorted_cards(cards: [number, number][]) {
+	return cards.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+}
+
+function trisort_cards(cards: [number, number][]): any {
 	const single = [],
 		double = [],
 		n = [];
@@ -65,8 +69,8 @@ export function encode(deck: DeckDefinition): string {
 	const writer = new BufferWriter();
 
 	const format = deck.format;
-	const heroes = deck.heroes;
-	const cards = deck.cards;
+	const heroes = deck.heroes.slice().sort();
+	const cards = sorted_cards(deck.cards.slice());
 
 	writer.null();
 	writer.varint(DECKSTRING_VERSION);
@@ -112,6 +116,7 @@ export function decode(deckstring: string): DeckDefinition {
 	for (let i = 0; i < heroes.length; i++) {
 		heroes[i] = reader.nextVarint();
 	}
+	heroes.sort();
 
 	const cards = [];
 	for (let i = 1; i <= 3; i++) {
@@ -122,6 +127,7 @@ export function decode(deckstring: string): DeckDefinition {
 			]);
 		}
 	}
+	sorted_cards(cards);
 
 	return {
 		cards,

@@ -1,10 +1,13 @@
 const { encode, decode } = require("../lib/index");
 const { expect } = require("chai");
 
-const EXAMPLE_DECKSTRING =
+const CANONICAL_DECKSTRING =
 	"AAECAR8GxwPJBLsFmQfZB/gIDI0B2AGoArUDhwSSBe0G6wfbCe0JgQr+DAA=";
 
-const EXAMPLE_DEFINITION = {
+const NONCANONICAL_DECKSTRING =
+	"AAECAR8GxwPJBLsFmQfZB/gIDJIF2AGoArUDhwSNAe0G6wfbCe0JgQr+DAA=";
+
+const CANONICAL_DEFINITION = {
 	cards: [
 		[141, 2], // Hunter's Mark
 		[216, 2], // Bloodfen Raptor
@@ -17,28 +20,63 @@ const EXAMPLE_DEFINITION = {
 		[699, 1], // Tundra Rhino
 		[877, 2], // Arcane Shot
 		[921, 1], // Jungle Panther
-		[1003, 2], // Houndmaster
 		[985, 1], // Dire Wolf Alpha
+		[1003, 2], // Houndmaster
 		[1144, 1], // King Crush
 		[1243, 2], // Unleash the Hounds
 		[1261, 2], // Savannah Highmane
 		[1281, 2], // Scavenging Hyena
 		[1662, 2], // Eaglehorn Bow
-	], // pairs of dbfid and count
+	], // pairs of [dbfid, count], by ascending dbfId
 	heroes: [31], // Rexxar
 	format: 2, // 1 for Wild, 2 for Standard
 };
 
+const NONCANONICAL_DEFINITION = Object.assign({}, CANONICAL_DEFINITION, {
+	cards: CANONICAL_DEFINITION.cards.slice(),
+	heros: CANONICAL_DEFINITION.heroes.slice(),
+});
+
+[
+	NONCANONICAL_DEFINITION.cards[0],
+	NONCANONICAL_DEFINITION.cards[7],
+	NONCANONICAL_DEFINITION.cards[9],
+] = [
+	NONCANONICAL_DEFINITION.cards[7],
+	NONCANONICAL_DEFINITION.cards[0],
+	NONCANONICAL_DEFINITION.cards[9],
+];
+
 describe("#encode", () => {
-	describe("with a valid deck definition", () => {
+	describe("with a canonical deck definition", () => {
 		let result;
 
 		before("should encode without an error", () => {
-			result = encode(EXAMPLE_DEFINITION);
+			result = encode(CANONICAL_DEFINITION);
+		});
+
+		it("should return a string", () => {
+			expect(result).to.be.a("string");
 		});
 
 		it("should return the expected deckstring", () => {
-			expect(result).to.equal(EXAMPLE_DECKSTRING);
+			expect(result).to.equal(CANONICAL_DECKSTRING);
+		});
+	});
+
+	describe("with a non-canonical deck definition", () => {
+		let result;
+
+		before("should encode without an error", () => {
+			result = encode(NONCANONICAL_DEFINITION);
+		});
+
+		it("should return a string", () => {
+			expect(result).to.be.a("string");
+		});
+
+		it("should return the expected deckstring", () => {
+			expect(result).to.equal(CANONICAL_DECKSTRING);
 		});
 	});
 
@@ -47,85 +85,97 @@ describe("#encode", () => {
 		expect(() => encode("somestring")).to.throw();
 		expect(() => encode([1, 2, 3])).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: null }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { heroes: null }))
 		).to.throw();
 	});
 
 	it("should throw an error when format is not 1 or 2", () => {
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { format: "1" }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { format: "1" }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { format: 3 }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { format: 3 }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { format: [1] }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { format: [1] }))
 		).to.throw();
 	});
 
 	it("should throw an error when heroes is not an array", () => {
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: 42 }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { heroes: 42 }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: "[]" }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { heroes: "[]" }))
 		).to.throw();
 	});
 
 	it("should throw an error when heroes contains an invalid dbf id", () => {
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: ["a"] }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { heroes: ["a"] }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: [42, "a"] }))
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, { heroes: [42, "a"] })
+			)
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: [42, "1"] }))
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, { heroes: [42, "1"] })
+			)
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { heroes: [-42] }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { heroes: [-42] }))
 		).to.throw();
 	});
 
 	it("should throw an error when cards is not an array", () => {
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: 2 }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { cards: 2 }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: "[]" }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { cards: "[]" }))
 		).to.throw();
 	});
 
 	it("should throw an error when cards contains a non-tuples", () => {
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [3] }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { cards: [3] }))
 		).to.throw();
 		expect(() =>
 			encode(
-				Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, 2], 3] })
+				Object.assign({}, CANONICAL_DEFINITION, { cards: [[1, 2], 3] })
 			)
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: ["a"] }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { cards: ["a"] }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, "a"]] }))
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, { cards: [[1, "a"]] })
+			)
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [["a", 1]] }))
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, { cards: [["a", 1]] })
+			)
 		).to.throw();
 	});
 
 	it("should throw an error when cards contains an invalid dbf id", () => {
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[-4, 1]] }))
-		).to.throw();
-		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[NaN, 1]] }))
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, { cards: [[-4, 1]] })
+			)
 		).to.throw();
 		expect(() =>
 			encode(
-				Object.assign({}, EXAMPLE_DEFINITION, {
+				Object.assign({}, CANONICAL_DEFINITION, { cards: [[NaN, 1]] })
+			)
+		).to.throw();
+		expect(() =>
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, {
 					cards: [[Infinity, 1]],
 				})
 			)
@@ -134,14 +184,18 @@ describe("#encode", () => {
 
 	it("should throw an error when cards contains an invalid count", () => {
 		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, -5]] }))
-		).to.throw();
-		expect(() =>
-			encode(Object.assign({}, EXAMPLE_DEFINITION, { cards: [[1, NaN]] }))
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, { cards: [[1, -5]] })
+			)
 		).to.throw();
 		expect(() =>
 			encode(
-				Object.assign({}, EXAMPLE_DEFINITION, {
+				Object.assign({}, CANONICAL_DEFINITION, { cards: [[1, NaN]] })
+			)
+		).to.throw();
+		expect(() =>
+			encode(
+				Object.assign({}, CANONICAL_DEFINITION, {
 					cards: [[1, Infinity]],
 				})
 			)
@@ -158,15 +212,21 @@ describe("#decode", () => {
 		expect(() => decode("123abc")).to.throw();
 	});
 
-	describe("with a valid deckstring", () => {
+	describe("with a canonical deckstring", () => {
 		let result;
 
 		before("should decode without an error", () => {
-			result = decode(EXAMPLE_DECKSTRING);
+			result = decode(CANONICAL_DECKSTRING);
 		});
 
 		it("should return an object", () => {
 			expect(result).to.be.a("object");
+		});
+
+		it("should return the expected deck definition", () => {
+			expect(JSON.stringify(result)).to.equal(
+				JSON.stringify(CANONICAL_DEFINITION)
+			);
 		});
 
 		it("should return a numeric format", () => {
@@ -182,15 +242,37 @@ describe("#decode", () => {
 		});
 
 		it("should return the encoded format", () => {
-			expect(result.format).to.equal(EXAMPLE_DEFINITION.format);
+			expect(result.format).to.equal(CANONICAL_DEFINITION.format);
 		});
 
 		it("should contain the encoded hero", () => {
-			expect(result.cards).to.have.deep.members(EXAMPLE_DEFINITION.cards);
+			expect(result.cards).to.have.deep.members(
+				CANONICAL_DEFINITION.cards
+			);
 		});
 
 		it("should contain the encoded cards", () => {
-			expect(result.cards).to.have.deep.members(EXAMPLE_DEFINITION.cards);
+			expect(result.cards).to.have.deep.members(
+				CANONICAL_DEFINITION.cards
+			);
+		});
+	});
+
+	describe("with a non-canonical deckstring", () => {
+		let result;
+
+		before("should decode without an error", () => {
+			result = decode(NONCANONICAL_DECKSTRING);
+		});
+
+		it("should return an object", () => {
+			expect(result).to.be.a("object");
+		});
+
+		it("should return the expected deck definition", () => {
+			expect(JSON.stringify(result)).to.equal(
+				JSON.stringify(CANONICAL_DEFINITION)
+			);
 		});
 	});
 });

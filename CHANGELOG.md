@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - Switch to a single UMD build
+- Always return canonical deckstrings and deck definitions  
+  *A canonical deckstring/deck definition has all heroes and cards sorted by dbf id in ascending order*
 
 ## [1.1.0] - 2017-07-27
 ### Changed
