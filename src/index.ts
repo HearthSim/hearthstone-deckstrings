@@ -1,10 +1,5 @@
 import { BufferReader, BufferWriter } from "./buffer";
-
-export interface DeckDefinition {
-	cards: [number, number][]; // [dbfId, count]
-	heroes: number[];
-	format: 1 | 2;
-}
+import { DeckDefinition } from "../types";
 
 const DECKSTRING_VERSION = 1;
 
