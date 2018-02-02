@@ -1,4 +1,4 @@
-const { encode, decode } = require("../lib/index");
+const { encode, decode } = require("../dist/index");
 const { expect } = require("chai");
 
 const CANONICAL_DECKSTRING =
