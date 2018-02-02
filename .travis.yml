@@ -13,14 +13,6 @@ deploy:
     on:
       tags: true
       branch: master
-  - provider: releases
-    api_key:
-      secure: grwqEV6OSMKZJUP+2Qkzslad2xbuDm36G/8rwj7FaF6M3mdWQS+CrbpM8qrO/gjgylmJumwDU+WuuS13aL+WzC4fYSI1exX4bWzlr8x+8hM1TexFOYnQ1I8ejSB+kQnSHdwDnEzE+C4PpRB6VZU53Yh181vfVqxzHQAvUpFzZv2lyhagzESItJuONxPMtZgdmlrB44hWSseRmsfTAghhmTOMhl3YbTQ9fPF5wk6ICi0X7OoG1Sk8+ankXQWGYuoHMGBHz2Q35/kMvpBCIjRj0P4X6r2txNiz+llSDYMNfZ1PSGwcUWqQLGcLz0WXZA6sMMXtjN9PbRNJepgm7NTRf71X+nvpsFFxmYta1/LcftlnJ2wlTSZkXu7Rc+Ujd9zrPDcQFKnmWVMsw2N8k9/zKkBNjNh8oXAQfujI/bNryv7VQ3YznRz5Vh8+kd+UvTC/wCeYCX0Vt7ZHDvu0AVMCdsXJn4uDJub0Awra+r+Ft/BcibjGQekbFIoxG6i9cYuf+S62SqfTvT/8ypSjtJyNlo5bKYM8Vrzh4NoBPHl0AjomszviLzxYkRcCNcobqPonDmvqEBWNm5Df0waf4g6gNB7N/4KQrPLjHeyJXcr0POzel58vZR8RZ3xf1oGw5KjN5Npw445wSV/tBW+MMBQjkzVXuo+TuMgCBnjrgmFKFRU=
-    file: dist/index.js
-    skip_cleanup: true
-    on:
-      tags: true
-      repo: HearthSim/npm-deckstrings
 cache:
   yarn: true
 notifications:
