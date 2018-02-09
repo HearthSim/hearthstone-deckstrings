@@ -4,11 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Add ES Module build
+- Add browser bundles
+- Add ES module bundles
 - Add Typescript typings
 
 ### Changed
-- Switch to a single UMD build
 - Always return canonical deckstrings and deck definitions  
   *A canonical deckstring/deck definition has all heroes and cards sorted by dbf id in ascending order*
 
