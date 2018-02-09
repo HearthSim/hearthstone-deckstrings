@@ -1,6 +1,6 @@
 import varint from "varint";
-import atob from "atob";
-import btoa from "btoa";
+import atob from "atob-lite";
+import btoa from "btoa-lite";
 
 /** @internal */
 export class Iterator {
