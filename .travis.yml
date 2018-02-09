@@ -3,7 +3,6 @@ node_js:
 - "node"
 script: yarn run $SCRIPT
 stages:
-  - name: test
   - name: release
     if: tag =~ ^v\d
 jobs:
@@ -23,7 +22,7 @@ jobs:
           - yarn run build
           - yarn run $SCRIPT
       - stage: release
-        script:
+        script: true
         deploy:
           - provider: npm
             email: benedict@hearthsim.net
