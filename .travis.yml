@@ -5,7 +5,7 @@ script: yarn run $SCRIPT
 stages:
   - name: test
   - name: release
-    if: branch = master AND tag IS present
+    if: tag =~ ^v\d
 jobs:
   include:
       - env: SCRIPT=lint
