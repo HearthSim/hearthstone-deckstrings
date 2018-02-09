@@ -4,9 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Add browser bundles
-- Add ES module bundles
-- Add Typescript typings
+- Added browser bundles
+- Added ES module bundles
+- Added Typescript typings
 
 ### Changed
 - Always return canonical deckstrings and deck definitions  
@@ -17,11 +17,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0] - 2017-07-27
 ### Changed
-- Switch deckstrings.js to UMD build
+- Switched deckstrings.js to UMD build
 
 ## [1.0.1] - 2017-07-27
 ### Fixed
-- Fix unnecessary dependency
+- Fixed unnecessary dependency
 
 ## [1.0.0] - 2017-07-27
 ### Changed
