@@ -1,5 +1,7 @@
+export type DeckList = [number, number][]; // [dbfId, count]
+
 export interface DeckDefinition {
-	cards: [number, number][]; // [dbfId, count]
+	cards: DeckList;
 	heroes: number[];
 	format: 1 | 2;
 }

@@ -1,5 +1,5 @@
 import { BufferReader, BufferWriter } from "./buffer";
-import { DeckDefinition } from "../types";
+import { DeckDefinition, DeckList } from "../types";
 
 const DECKSTRING_VERSION = 1;
 
@@ -20,14 +20,14 @@ function isPositiveNaturalNumber(n: any): boolean {
 	return n > 0;
 }
 
-function sorted_cards(cards: [number, number][]) {
+function sorted_cards(cards: DeckList) {
 	return cards.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
 }
 
-function trisort_cards(cards: [number, number][]): any {
-	const single = [],
-		double = [],
-		n = [];
+function trisort_cards(cards: DeckList): any {
+	const single: DeckList = [],
+		double: DeckList = [],
+		n: DeckList = [];
 	for (const tuple of cards) {
 		let list;
 		const [card, count] = tuple;
@@ -113,7 +113,7 @@ export function decode(deckstring: string): DeckDefinition {
 	}
 	heroes.sort();
 
-	const cards = [];
+	const cards: DeckList = [];
 	for (let i = 1; i <= 3; i++) {
 		for (let j = 0, c = reader.nextVarint(); j < c; j++) {
 			cards.push([

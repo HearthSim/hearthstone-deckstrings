@@ -16,7 +16,7 @@ export class Iterator {
 
 /** @internal */
 export class BufferWriter extends Iterator {
-	buffer: any;
+	buffer: number[];
 
 	constructor() {
 		super();
@@ -41,7 +41,7 @@ export class BufferWriter extends Iterator {
 
 /** @internal */
 export class BufferReader extends Iterator {
-	buffer: any;
+	buffer: Uint8Array;
 
 	constructor(string: any) {
 		super();
