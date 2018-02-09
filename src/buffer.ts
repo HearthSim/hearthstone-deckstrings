@@ -1,6 +1,5 @@
 import varint from "varint";
-import atob from "atob-lite";
-import btoa from "btoa-lite";
+import { atob, btoa } from "./base64";
 
 /** @internal */
 export class Iterator {
@@ -35,8 +34,8 @@ export class BufferWriter extends Iterator {
 	}
 
 	public toString() {
-		const buffer = String.fromCharCode(...this.buffer);
-		return btoa(buffer);
+		const binary = String.fromCharCode(...this.buffer);
+		return btoa(binary);
 	}
 }
 

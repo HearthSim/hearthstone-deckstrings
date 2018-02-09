@@ -1,3 +1,4 @@
+import jscc from "rollup-plugin-jscc";
 import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 import typescript from "rollup-plugin-typescript";
@@ -19,6 +20,12 @@ export default [
 			},
 		],
 		plugins: [
+			jscc({
+				values: {
+					_PLATFORM: "node",
+				},
+				extensions: [".js", ".ts"],
+			}),
 			typescript({
 				typescript: tsc,
 			}),
@@ -40,6 +47,12 @@ export default [
 			},
 		],
 		plugins: [
+			jscc({
+				values: {
+					_PLATFORM: "browser",
+				},
+				extensions: [".js", ".ts"],
+			}),
 			typescript({
 				typescript: tsc,
 			}),
