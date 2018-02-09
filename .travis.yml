@@ -2,8 +2,9 @@ language: node_js
 node_js:
 - "node"
 script:
-- yarn test
 - yarn lint
+- yarn build
+- yarn test:mocha
 deploy:
   - provider: npm
     email: benedict@hearthsim.net

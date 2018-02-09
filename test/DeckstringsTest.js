@@ -1,5 +1,9 @@
-const { encode, decode } = require("../dist/index");
+/*#if _PLATFORM === "browser"
+import { decode, encode } from "../dist/browser.mjs";
+//#else */
+const { decode, encode } = require("../dist/index");
 const { expect } = require("chai");
+//#endif
 
 const CANONICAL_DECKSTRING =
 	"AAECAR8GxwPJBLsFmQfZB/gIDI0B2AGoArUDhwSSBe0G6wfbCe0JgQr+DAA=";
