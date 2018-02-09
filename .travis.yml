@@ -3,6 +3,7 @@ node_js:
 - "node"
 script: yarn run $SCRIPT
 stages:
+  - name: test
   - name: release
     if: tag =~ ^v\d
 jobs:
