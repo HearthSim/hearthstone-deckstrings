@@ -30,9 +30,6 @@ jobs:
               secure: gVYNyDHMXz47vvGu2ve8pMorSJMG6Bq3AiOLm1ZUubLaB5MzyFPpKhBor/ETA18vlNXL/PahyGXZjrqiaGi5+BmtYsc4R91CukOmRpzErgYzJ3JldteV0DcyrkX3akL6KXPHEhlOMqkr6kcgZj+QsvvxfybikuNH9UedEl1z5L06dlOVgoEzFcP3x7fOExtZ0AurLFnTbqSRkpj7a8Bj+GE/f6BNrT3j+YgBdNL9sCsuxLuDYvoYUQJuHyCNduztssBeCAKkYCgm/Rf2Yh3DUe33sG2gkXaArHl0ZePf97zFEy6NdlTgcsjLp77UNDcgkvU+bOxDfOqQ/OBkpSwCAax7BkIbbEekT26LdMF17f0bLx+FA8VX0rS1L0hBqLpeCumQR8AhXQRxuNokZ/azOeWDteGG8ZRDrzBV/H8O5zZMZtAjHA3L8yNwBQApYSNiitGahIY2geWxzf55l18Ekgs3n+ISC/GPIEyAebIxcdn/7jI7djslsVrK0At7lo5PBMTMwRoOT5MHRnL9EMR+9UrYLu3INKINCvOsOjfRy8wDbYK3Rd82thyFJhlK7KYnrcGpHZNTZoV6CDNDXPTwKG42GgQ2/zOwiHXxMVI3GTmTh4ByRQkLZQRz3jn7PLtM2SHtvvySe+R1oiI4r8g0S3uFq1qKYi4Cnsk9NJaTwN8=
             skip_cleanup: true
             tag: next
-            on:
-              tags: true
-              branch: master
 cache:
   yarn: true
 notifications:
