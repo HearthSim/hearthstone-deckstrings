@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Always return canonical deckstrings and deck definitions  
   *A canonical deckstring/deck definition has all heroes and cards sorted by dbf id in ascending order*
 
+### Removed
+- Removed test code in npm package
+
 ## [1.1.0] - 2017-07-27
 ### Changed
 - Switch deckstrings.js to UMD build
