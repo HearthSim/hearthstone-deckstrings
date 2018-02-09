@@ -23,7 +23,7 @@ jobs:
           - yarn run build
           - yarn run $SCRIPT
       - stage: release
-        env: SCRIPT=build
+        script:
         deploy:
           - provider: npm
             email: benedict@hearthsim.net
