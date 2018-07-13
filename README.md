@@ -20,12 +20,12 @@ $ yarn add deckstrings
 ## Usage
 
 ```javascript
-import {encode, decode} from "deckstrings";
+import { encode, decode, FormatType } from "deckstrings";
 
 const deck = {
 	cards: [[1, 2], [2, 2], [3, 2], [4, 1]], // [dbfid, count] pairs
 	heroes: [7], // Garrosh Hellscream
-	format: 1, // 1 for Wild, 2 for Standard
+	format: FormatType.FT_WILD, // or 1 for Wild, 2 for Standard
 };
 
 const deckstring = encode(deck);

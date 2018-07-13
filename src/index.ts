@@ -1,7 +1,6 @@
 import { BufferReader, BufferWriter } from "./buffer";
 import { DeckDefinition, DeckList } from "../types";
-
-const DECKSTRING_VERSION = 1;
+import { DECKSTRING_VERSION, FormatType } from "./constants";
 
 function verifyDbfId(id: any, name?: string): void {
 	name = name ? name : "dbf id";
@@ -54,7 +53,8 @@ function trisort_cards(cards: DeckList): any {
 export function encode(deck: DeckDefinition): string {
 	if (
 		typeof deck !== "object" ||
-		(deck.format !== 1 && deck.format !== 2) ||
+		(deck.format !== FormatType.FT_WILD &&
+			deck.format !== FormatType.FT_STANDARD) ||
 		!Array.isArray(deck.heroes) ||
 		!Array.isArray(deck.cards)
 	) {
@@ -103,7 +103,7 @@ export function decode(deckstring: string): DeckDefinition {
 	}
 
 	const format = reader.nextVarint();
-	if (format !== 1 && format !== 2) {
+	if (format !== FormatType.FT_WILD && format !== FormatType.FT_STANDARD) {
 		throw new Error(`Unsupported format ${format} in deckstring`);
 	}
 
@@ -130,3 +130,5 @@ export function decode(deckstring: string): DeckDefinition {
 		format,
 	};
 }
+
+export { FormatType };

@@ -1,7 +1,7 @@
 /*#if _PLATFORM === "browser"
-import { decode, encode } from "../dist/browser.mjs";
+import { decode, encode, FormatType } from "../dist/browser.mjs";
 //#else */
-const { decode, encode } = require("../dist/index");
+const { decode, encode, FormatType } = require("../dist/index");
 const { expect } = require("chai");
 //#endif
 
@@ -33,7 +33,7 @@ const CANONICAL_DEFINITION = {
 		[1662, 2], // Eaglehorn Bow
 	], // pairs of [dbfid, count], by ascending dbfId
 	heroes: [31], // Rexxar
-	format: 2, // 1 for Wild, 2 for Standard
+	format: FormatType.FT_STANDARD, // 1 for Wild, 2 for Standard
 };
 
 const NONCANONICAL_DEFINITION = Object.assign({}, CANONICAL_DEFINITION, {
