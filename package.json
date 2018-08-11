@@ -6,7 +6,7 @@
     "hearthstone",
     "deckstrings"
   ],
-  "homepage": "https://github.com/HearthSim/npm-deckstrings#readme",
+  "homepage": "https://github.com/HearthSim/npm-deckstrings",
   "bugs": {
     "url": "https://github.com/HearthSim/npm-deckstrings/issues"
   },
@@ -52,5 +52,9 @@
     "varint": "^5.0.0"
   },
   "dependencies": {},
-  "sideEffects": false
+  "sideEffects": false,
+  "prettier": {
+    "useTabs": true,
+    "trailingComma": "es5"
+  }
 }
