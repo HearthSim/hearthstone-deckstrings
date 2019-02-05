@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Export FormatType constants  
+  *Use `FormatType.FT_WILD` or `FormatType.FT_STANDARD` in place of magical constants when checking a decks format*
 
 ## [2.0.0] - 2018-02-09
 ### Added
