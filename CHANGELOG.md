@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [2.1.0] - 2019-02-05
 ### Added
 - Export FormatType constants  
   *Use `FormatType.FT_WILD` or `FormatType.FT_STANDARD` in place of magical constants when checking a decks format*
@@ -50,7 +52,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix a decoding bug
 
-[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/HearthSim/npm-deckstrings/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/HearthSim/npm-deckstrings/compare/1.1.0...v2.0.0
 [1.1.0]: https://github.com/HearthSim/npm-deckstrings/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/HearthSim/npm-deckstrings/compare/1.0.0...1.0.1
