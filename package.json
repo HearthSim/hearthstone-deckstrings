@@ -14,7 +14,7 @@
   "author": "Benedict Etzel <benedict@hearthsim.net>",
   "main": "./dist/index",
   "browser": "./dist/browser",
-  "types": "./types.d.ts",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HearthSim/npm-deckstrings.git"
