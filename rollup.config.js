@@ -1,7 +1,7 @@
 import jscc from "rollup-plugin-jscc";
 import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
-import typescript from "rollup-plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
 import tsc from "typescript";
 import pkg from "./package.json";
 
