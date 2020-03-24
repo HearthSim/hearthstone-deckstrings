@@ -4,10 +4,9 @@
 
 Decode and encode Hearthstone [deckstrings](https://hearthsim.info/docs/deckstrings/).
 
-Any deckstring or deck definition returned by this library will be canonical.
-This means that the cards and heroes are sorted in ascending order by dbf id.
+A mapping between DBF ids and cards can be found at [HearthstoneJSON](https://hearthstonejson.com/).
 
-A mapping between dbf ids and cards can be found at [HearthstoneJSON](https://hearthstonejson.com/).
+Any deckstring or deck definition returned by this library will be "canonical": The cards and heroes are sorted by DBF id in ascending order.
 
 ## Install
 
@@ -23,7 +22,7 @@ $ yarn add deckstrings
 import { encode, decode, FormatType } from "deckstrings";
 
 const deck = {
-	cards: [[1, 2], [2, 2], [3, 2], [4, 1]], // [dbfid, count] pairs
+	cards: [[1, 2], [2, 2], [3, 2], [4, 1]], // [dbfId, count] pairs
 	heroes: [7], // Garrosh Hellscream
 	format: FormatType.FT_WILD, // or 1 for Wild, 2 for Standard
 };
