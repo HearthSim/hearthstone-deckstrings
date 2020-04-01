@@ -14,7 +14,7 @@
   "author": "Benedict Etzel <benedict@hearthsim.net>",
   "main": "./dist/index",
   "browser": "./dist/browser",
-  "types": "./types.d.ts",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HearthSim/npm-deckstrings.git"
@@ -42,12 +42,12 @@
     "karma-rollup-preprocessor": "^5.1.1",
     "mocha": "^5.0.0",
     "prettier": "^1.10.2",
-    "rollup": "^0.55.1",
+    "rollup": "^0.68.2",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-jscc": "^0.3.3",
     "rollup-plugin-node-resolve": "^3.0.2",
-    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-typescript2": "^0.19.2",
     "typescript": "^2.7.1",
     "varint": "^5.0.0"
   },

@@ -1,4 +1,4 @@
-import varint from "varint";
+import * as varint from "varint";
 import { atob, btoa } from "./base64";
 
 /** @internal */

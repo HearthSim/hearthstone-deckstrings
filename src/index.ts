@@ -131,4 +131,4 @@ export function decode(deckstring: string): DeckDefinition {
 	};
 }
 
-export { FormatType };
+export { FormatType, DeckDefinition, DeckList };
