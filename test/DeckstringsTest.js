@@ -51,6 +51,33 @@ const NONCANONICAL_DEFINITION = Object.assign({}, CANONICAL_DEFINITION, {
 	NONCANONICAL_DEFINITION.cards[9],
 ];
 
+const CLASSIC_DECKSTRING =
+	"AAEDAaa4AwTTlQSvlgT6oASPowQN25UE3JUEppYEsJYEtpYEvZYE1JYE3ZYE6aEE8KEE8aEE86EE1KIEAA==";
+
+const CLASSIC_DEFINITION = {
+	cards: [
+		[68307, 1],
+		[68315, 2],
+		[68316, 2],
+		[68390, 2],
+		[68399, 1],
+		[68400, 2],
+		[68406, 2],
+		[68413, 2],
+		[68436, 2],
+		[68445, 2],
+		[69754, 1],
+		[69865, 2],
+		[69872, 2],
+		[69873, 2],
+		[69875, 2],
+		[69972, 2],
+		[70031, 1],
+	], // pairs of [dbfid, count], by ascending dbfId
+	heroes: [56358], // Elise Starseeker
+	format: FormatType.FT_CLASSIC, // 1 for Wild, 2 for Standard
+};
+
 describe("#encode", () => {
 	describe("with a canonical deck definition", () => {
 		let result;
@@ -84,6 +111,22 @@ describe("#encode", () => {
 		});
 	});
 
+	describe("with a classic deck definition", () => {
+		let result;
+
+		before("should encode without an error", () => {
+			result = encode(CLASSIC_DEFINITION);
+		});
+
+		it("should return a string", () => {
+			expect(result).to.be.a("string");
+		});
+
+		it("should return the expected deckstring", () => {
+			expect(result).to.equal(CLASSIC_DECKSTRING);
+		});
+	});
+
 	it("should throw an error with an invalid deck definition", () => {
 		expect(() => encode(477)).to.throw();
 		expect(() => encode("somestring")).to.throw();
@@ -93,12 +136,12 @@ describe("#encode", () => {
 		).to.throw();
 	});
 
-	it("should throw an error when format is not 1 or 2", () => {
+	it("should throw an error when format is not 1, 2 or 3", () => {
 		expect(() =>
 			encode(Object.assign({}, CANONICAL_DEFINITION, { format: "1" }))
 		).to.throw();
 		expect(() =>
-			encode(Object.assign({}, CANONICAL_DEFINITION, { format: 3 }))
+			encode(Object.assign({}, CANONICAL_DEFINITION, { format: 4 }))
 		).to.throw();
 		expect(() =>
 			encode(Object.assign({}, CANONICAL_DEFINITION, { format: [1] }))
@@ -276,6 +319,24 @@ describe("#decode", () => {
 		it("should return the expected deck definition", () => {
 			expect(JSON.stringify(result)).to.equal(
 				JSON.stringify(CANONICAL_DEFINITION)
+			);
+		});
+	});
+
+	describe("with a classic deckstring", () => {
+		let result;
+
+		before("should decode without an error", () => {
+			result = decode(CLASSIC_DECKSTRING);
+		});
+
+		it("should return an object", () => {
+			expect(result).to.be.a("object");
+		});
+
+		it("should return the expected deck definition", () => {
+			expect(JSON.stringify(result)).to.equal(
+				JSON.stringify(CLASSIC_DEFINITION)
 			);
 		});
 	});

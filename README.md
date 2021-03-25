@@ -24,7 +24,7 @@ import { encode, decode, FormatType } from "deckstrings";
 const deck = {
 	cards: [[1, 2], [2, 2], [3, 2], [4, 1]], // [dbfId, count] pairs
 	heroes: [7], // Garrosh Hellscream
-	format: FormatType.FT_WILD, // or 1 for Wild, 2 for Standard
+	format: FormatType.FT_WILD, // or FT_STANDARD or FT_CLASSIC
 };
 
 const deckstring = encode(deck);

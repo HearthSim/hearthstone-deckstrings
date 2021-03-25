@@ -54,7 +54,8 @@ export function encode(deck: DeckDefinition): string {
 	if (
 		typeof deck !== "object" ||
 		(deck.format !== FormatType.FT_WILD &&
-			deck.format !== FormatType.FT_STANDARD) ||
+			deck.format !== FormatType.FT_STANDARD &&
+			deck.format !== FormatType.FT_CLASSIC) ||
 		!Array.isArray(deck.heroes) ||
 		!Array.isArray(deck.cards)
 	) {
@@ -103,7 +104,11 @@ export function decode(deckstring: string): DeckDefinition {
 	}
 
 	const format = reader.nextVarint();
-	if (format !== FormatType.FT_WILD && format !== FormatType.FT_STANDARD) {
+	if (
+		format !== FormatType.FT_WILD &&
+		format !== FormatType.FT_STANDARD &&
+		format !== FormatType.FT_CLASSIC
+	) {
 		throw new Error(`Unsupported format ${format} in deckstring`);
 	}
 
