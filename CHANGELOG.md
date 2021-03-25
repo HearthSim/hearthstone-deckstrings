@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [2.2.0] - 2021-03-25
 ### Added
 - Added support for the Classic format  
   *Use `FormatType.FT_CLASSIC` for decks in the classic format*
@@ -55,7 +57,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix a decoding bug
 
-[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/HearthSim/npm-deckstrings/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/HearthSim/npm-deckstrings/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/HearthSim/npm-deckstrings/compare/1.1.0...v2.0.0
 [1.1.0]: https://github.com/HearthSim/npm-deckstrings/compare/1.0.1...1.1.0
