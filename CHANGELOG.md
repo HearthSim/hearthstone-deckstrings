@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Added support for the Classic format  
+  *Use `FormatType.FT_CLASSIC` for decks in the classic format*
 
 ## [2.1.0] - 2019-02-05
 ### Added

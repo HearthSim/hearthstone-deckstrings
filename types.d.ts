@@ -1,4 +1,4 @@
-export type FormatType = 1 | 2;
+export type FormatType = 1 | 2 | 3;
 
 export type DeckList = [number, number][]; // [dbfId, count]
 
