@@ -1,7 +1,13 @@
 /*#if _PLATFORM === "browser"
 import { decode, encode, FormatType } from "../dist/browser.mjs";
 //#else */
-const { decode, encode, FormatType } = require("../dist/index");
+const {
+	decode,
+	decodeMercs,
+	encode,
+	encodeMercs,
+	FormatType,
+} = require("../dist/index");
 const { expect } = require("chai");
 //#endif
 
@@ -78,6 +84,53 @@ const CLASSIC_DEFINITION = {
 	format: FormatType.FT_CLASSIC, // 1 for Wild, 2 for Standard
 };
 
+const MERCS_DECKSTRING =
+	"CKfwkRQSCk5hdHVyZWxpc2gYASJFCgoIQBC9ARiYASAACgkIFRC6ARgpIAAKCQg/EGAYlQEgAAoLCJ0BEKwBGO4BIAAKCQgWEK0BGCwgAAoJCGYQ0wEYByACKAo=";
+
+const MERCS_DEFINITION = {
+	teamId: 42235943,
+	name: "Naturelish",
+	type: 1,
+	mercenaries: [
+		{
+			mercenaryId: 64,
+			selectedEquipmentId: 189,
+			selectedArtVariationId: 152,
+			selectedArtVariationPremium: 0,
+		},
+		{
+			mercenaryId: 21,
+			selectedEquipmentId: 186,
+			selectedArtVariationId: 41,
+			selectedArtVariationPremium: 0,
+		},
+		{
+			mercenaryId: 63,
+			selectedEquipmentId: 96,
+			selectedArtVariationId: 149,
+			selectedArtVariationPremium: 0,
+		},
+		{
+			mercenaryId: 157,
+			selectedEquipmentId: 172,
+			selectedArtVariationId: 238,
+			selectedArtVariationPremium: 0,
+		},
+		{
+			mercenaryId: 22,
+			selectedEquipmentId: 173,
+			selectedArtVariationId: 44,
+			selectedArtVariationPremium: 0,
+		},
+		{
+			mercenaryId: 102,
+			selectedEquipmentId: 211,
+			selectedArtVariationId: 7,
+			selectedArtVariationPremium: 2,
+		},
+	],
+};
+
 describe("#encode", () => {
 	describe("with a canonical deck definition", () => {
 		let result;
@@ -124,6 +177,22 @@ describe("#encode", () => {
 
 		it("should return the expected deckstring", () => {
 			expect(result).to.equal(CLASSIC_DECKSTRING);
+		});
+	});
+
+	describe("with a mercs deck definition", () => {
+		let result;
+
+		before("should encode without an error", () => {
+			result = encodeMercs(MERCS_DEFINITION);
+		});
+
+		it("should return a string", () => {
+			expect(result).to.be.a("string");
+		});
+
+		it("should return the expected deckstring", () => {
+			expect(result).to.equal(MERCS_DECKSTRING);
 		});
 	});
 
@@ -337,6 +406,24 @@ describe("#decode", () => {
 		it("should return the expected deck definition", () => {
 			expect(JSON.stringify(result)).to.equal(
 				JSON.stringify(CLASSIC_DEFINITION)
+			);
+		});
+	});
+
+	describe("with a mercs deckstring", () => {
+		let result;
+
+		before("should decode without an error", () => {
+			result = decodeMercs(MERCS_DECKSTRING);
+		});
+
+		it("should return an object", () => {
+			expect(result).to.be.a("object");
+		});
+
+		it("should return the expected deck definition", () => {
+			expect(JSON.stringify(result)).to.equal(
+				JSON.stringify(MERCS_DEFINITION)
 			);
 		});
 	});
