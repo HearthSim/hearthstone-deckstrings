@@ -8,6 +8,22 @@ export interface DeckDefinition {
 	format: FormatType;
 }
 
+export interface MercenariesTeamDefinition {
+	teamId: number;
+	name: string;
+	type: number;
+	mercenaries: MercenaryDefinition[];
+}
+
+export interface MercenaryDefinition {
+	mercenaryId: number;
+	selectedEquipmentId: number;
+	selectedArtVariationId: number;
+	selectedArtVariationPremium: number;
+	sharedTeamMercenaryXp: number;
+	sharedTeamMercenaryIsFullyUpgraded: number;
+}
+
 export function encode(deck: DeckDefinition): string;
 
 export function decode(deckstring: string): DeckDefinition;
