@@ -68,6 +68,11 @@ export function encode(deck: DeckDefinition): string {
 	const heroes = deck.heroes.slice().sort();
 	const cards = sorted_cards(deck.cards.slice());
 
+	let sideboard = [];
+	if (deck.sideboard) {
+		sideboard = sorted_cards(deck.sideboard.slice());
+	}
+
 	writer.null();
 	writer.varint(DECKSTRING_VERSION);
 	writer.varint(format);
@@ -84,6 +89,22 @@ export function encode(deck: DeckDefinition): string {
 			writer.varint(card);
 			if (count !== 1 && count !== 2) {
 				writer.varint(count);
+			}
+		}
+	}
+
+	if (sideboard.length) {
+		writer.varint(1); // has sideboard
+
+		for (let list of trisort_cards(sideboard)) {
+			writer.varint(list.length);
+			for (let tuple of list) {
+				const [card, count, parent] = tuple;
+				writer.varint(card);
+				if (count !== 1 && count !== 2) {
+					writer.varint(count);
+				}
+				writer.varint(parent);
 			}
 		}
 	}
@@ -129,11 +150,37 @@ export function decode(deckstring: string): DeckDefinition {
 	}
 	sorted_cards(cards);
 
-	return {
+	let sideboard: DeckList = [];
+	// reader will throw exception if sideboard data is missing
+	try {
+		const hasSideboard = reader.nextVarint();
+
+		for (let i = 1; i <= 3; i++) {
+			for (let j = 0, c = reader.nextVarint(); j < c; j++) {
+				sideboard.push([
+					reader.nextVarint(),
+					i === 1 || i === 2 ? i : reader.nextVarint(),
+					reader.nextVarint()
+				]);
+			}
+		}
+
+		sorted_cards(sideboard);
+	} catch {
+
+	}
+
+	let decodedDeck = {
 		cards,
 		heroes,
 		format,
 	};
+
+	if (sideboard.length) {
+		decodedDeck.sideboard = sideboard;
+	}
+
+	return decodedDeck;
 }
 
 export { FormatType };
