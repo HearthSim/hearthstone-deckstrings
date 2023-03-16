@@ -51,6 +51,53 @@ const NONCANONICAL_DEFINITION = Object.assign({}, CANONICAL_DEFINITION, {
 	NONCANONICAL_DEFINITION.cards[9],
 ];
 
+const CANONICAL_SIDEBOARD_DECKSTRING = 
+	"AAECAfHhBALLpQX9xAUO9eME/OME/uMEguQEseYEueYE0e0E2fEEl/YE4PYEsvcEtIAFqIEFrqEFAAEDs/cE/cQFtPcE/cQFzKUF/cQFAAA=";
+
+const CANONICAL_SIDEBOARD_DEFINITION = {
+	cards: [
+		[ 78325, 2 ], 	// Frost Strike
+		[ 78332, 2 ], 	// Heart Strike
+	    [ 78334, 2 ], 	// Icy Touch
+	    [ 78338, 2 ], 	// Horn of Winter
+	    [ 78641, 2 ], 	// Noxious Cadaver
+	    [ 78649, 2 ], 	// Deathchiller
+	    [ 79569, 2 ], 	// Defrost
+	    [ 80089, 2 ], 	// Acolyte of Death
+	    [ 80663, 2 ], 	// Vicious Bloodworm
+	    [ 80736, 2 ], 	// Runeforging
+	    [ 80818, 2 ], 	// Body Bagger
+	    [ 81972, 2 ], 	// Harbinger of Winter
+	    [ 82088, 2 ], 	// Obliterate
+	    [ 86190, 2 ], 	// Skeletal Sidekick
+	    [ 86731, 1 ], 	// Thassarian
+	    [ 90749, 1 ]  	// E.T.C., Band Manager
+	], // pairs of [dbfid, count], by ascending dbfId
+	heroes: [78065], // The Lich King
+	format: FormatType.FT_STANDARD, // 1 for Wild, 2 for Standard
+	sideboard: [
+		[ 80819, 1, 90749 ], // Gnome Muncher
+		[ 80820, 1, 90749 ], // Corpse Bride
+		[ 86732, 1, 90749 ]  // Overseer Frigidara
+	], // [dbfid, count, parentDbfid] by ascending dbfId
+};
+
+const NONCANONICAL_SIDEBOARD_DEFINITION = Object.assign({}, CANONICAL_SIDEBOARD_DEFINITION, {
+	cards: CANONICAL_SIDEBOARD_DEFINITION.cards.slice(),
+	heroes: CANONICAL_SIDEBOARD_DEFINITION.heroes.slice(),
+	sideboard: CANONICAL_SIDEBOARD_DEFINITION.sideboard.slice(),
+});
+
+[
+	NONCANONICAL_SIDEBOARD_DEFINITION.sideboard[0],
+	NONCANONICAL_SIDEBOARD_DEFINITION.sideboard[1],
+	NONCANONICAL_SIDEBOARD_DEFINITION.sideboard[2],
+] = [
+	NONCANONICAL_SIDEBOARD_DEFINITION.sideboard[2],
+	NONCANONICAL_SIDEBOARD_DEFINITION.sideboard[1],
+	NONCANONICAL_SIDEBOARD_DEFINITION.sideboard[0],
+];
+
 const CLASSIC_DECKSTRING =
 	"AAEDAaa4AwTTlQSvlgT6oASPowQN25UE3JUEppYEsJYEtpYEvZYE1JYE3ZYE6aEE8KEE8aEE86EE1KIEAA==";
 
@@ -108,6 +155,38 @@ describe("#encode", () => {
 
 		it("should return the expected deckstring", () => {
 			expect(result).to.equal(CANONICAL_DECKSTRING);
+		});
+	});
+
+	describe("with a canonical deck definition, including a sideboard", () => {
+		let result;
+
+		before("should encode without an error", () => {
+			result = encode(CANONICAL_SIDEBOARD_DEFINITION);
+		});
+
+		it("should return a string", () => {
+			expect(result).to.be.a("string");
+		});
+
+		it("should return the expected deckstring", () => {
+			expect(result).to.equal(CANONICAL_SIDEBOARD_DECKSTRING);
+		});
+	});
+
+	describe("with a non-canonical deck definition, including a sideboard", () => {
+		let result;
+
+		before("should encode without an error", () => {
+			result = encode(NONCANONICAL_SIDEBOARD_DEFINITION);
+		});
+
+		it("should return a string", () => {
+			expect(result).to.be.a("string");
+		});
+
+		it("should return the expected deckstring", () => {
+			expect(result).to.equal(CANONICAL_SIDEBOARD_DECKSTRING);
 		});
 	});
 
@@ -301,6 +380,62 @@ describe("#decode", () => {
 		it("should contain the encoded cards", () => {
 			expect(result.cards).to.have.deep.members(
 				CANONICAL_DEFINITION.cards
+			);
+		});
+	});
+
+	describe("with a canonical deckstring, including a sideboard", () => {
+		let result;
+
+		before("should decode without an error", () => {
+			result = decode(CANONICAL_SIDEBOARD_DECKSTRING);
+		});
+
+		it("should return an object", () => {
+			expect(result).to.be.a("object");
+		});
+
+		it("should return the expected deck definition", () => {
+			expect(JSON.stringify(result)).to.equal(
+				JSON.stringify(CANONICAL_SIDEBOARD_DEFINITION)
+			);
+		});
+
+		it("should return a numeric format", () => {
+			expect(result.format).to.be.a("number");
+		});
+
+		it("should return a list of cards", () => {
+			expect(result.cards).to.be.a("array");
+		});
+
+		it("should return a list of heroes", () => {
+			expect(result.heroes).to.be.a("array");
+		});
+
+		it("should return a list of sideboard cards", () => {
+			expect(result.sideboard).to.be.a("array");
+		});
+
+		it("should return the encoded format", () => {
+			expect(result.format).to.equal(CANONICAL_SIDEBOARD_DEFINITION.format);
+		});
+
+		it("should contain the encoded hero", () => {
+			expect(result.heroes).to.have.deep.members(
+				CANONICAL_SIDEBOARD_DEFINITION.heroes
+			);
+		});
+
+		it("should contain the encoded cards", () => {
+			expect(result.cards).to.have.deep.members(
+				CANONICAL_SIDEBOARD_DEFINITION.cards
+			);
+		});
+
+		it("should contain the encoded sideboard", () => {
+			expect(result.sideboard).to.have.deep.members(
+				CANONICAL_SIDEBOARD_DEFINITION.sideboard
 			);
 		});
 	});
