@@ -1,9 +1,11 @@
 export type FormatType = 1 | 2 | 3;
 
-export type DeckList = [number, number][]; // [dbfId, count]
+export type DeckCard = [number, number]; // [dbfId, count]
+
+export type DeckList = DeckCard[]; // keep type for backwards compatibility
 
 export interface DeckDefinition {
-	cards: DeckList;
+	cards: DeckCard[];
 	heroes: number[];
 	format: FormatType;
 }

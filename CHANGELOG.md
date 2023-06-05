@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Added `DeckCard` type  
+  *Use `DeckCard[]` over `DeckList` in your code*
 
 ## [2.2.1] - 2021-03-25
 ### Added

@@ -1,15 +1,15 @@
 import { BufferReader, BufferWriter } from "./buffer";
-import { DeckDefinition, DeckList } from "../types";
+import { DeckDefinition, DeckCard } from "../types";
 import { DECKSTRING_VERSION, FormatType } from "./constants";
 
-function verifyDbfId(id: any, name?: string): void {
+function verifyDbfId(id: unknown, name?: string): void {
 	name = name ? name : "dbf id";
 	if (!isPositiveNaturalNumber(id)) {
 		throw new Error(`Invalid ${name} ${id} (expected valid dbf id)`);
 	}
 }
 
-function isPositiveNaturalNumber(n: any): boolean {
+function isPositiveNaturalNumber(n: unknown): boolean {
 	if (typeof n !== "number" || !isFinite(n)) {
 		return false;
 	}
@@ -19,33 +19,31 @@ function isPositiveNaturalNumber(n: any): boolean {
 	return n > 0;
 }
 
-function sorted_cards(cards: DeckList) {
+function sort_cards<T extends DeckCard>(cards: T[]): T[] {
 	return cards.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
 }
 
-function trisort_cards(cards: DeckList): any {
-	const single: DeckList = [],
-		double: DeckList = [],
-		n: DeckList = [];
+function trisort_cards<T extends DeckCard>(cards: T[]): [T[], T[], T[]] {
+	const single: T[] = [],
+		double: T[] = [],
+		n: T[] = [];
 	for (const tuple of cards) {
-		let list;
 		const [card, count] = tuple;
 		verifyDbfId(card, "card");
 		if (count === 0) {
 			continue;
 		}
 		if (count === 1) {
-			list = single;
+			single.push(tuple);
 		} else if (count === 2) {
-			list = double;
+			double.push(tuple);
 		} else if (isPositiveNaturalNumber(count)) {
-			list = n;
+			n.push(tuple);
 		} else {
 			throw new Error(
 				`Invalid count ${count} (expected positive natural number)`
 			);
 		}
-		list.push(tuple);
 	}
 	return [single, double, n];
 }
@@ -66,7 +64,7 @@ export function encode(deck: DeckDefinition): string {
 
 	const format = deck.format;
 	const heroes = deck.heroes.slice().sort();
-	const cards = sorted_cards(deck.cards.slice());
+	const cards = sort_cards(deck.cards.slice());
 
 	writer.null();
 	writer.varint(DECKSTRING_VERSION);
@@ -118,7 +116,7 @@ export function decode(deckstring: string): DeckDefinition {
 	}
 	heroes.sort();
 
-	const cards: DeckList = [];
+	const cards: DeckCard[] = [];
 	for (let i = 1; i <= 3; i++) {
 		for (let j = 0, c = reader.nextVarint(); j < c; j++) {
 			cards.push([
@@ -127,7 +125,7 @@ export function decode(deckstring: string): DeckDefinition {
 			]);
 		}
 	}
-	sorted_cards(cards);
+	sort_cards(cards);
 
 	return {
 		cards,
