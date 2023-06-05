@@ -437,3 +437,33 @@ describe("decode", () => {
 		});
 	});
 });
+
+describe("end-to-end", () => {
+	[
+		CANONICAL_DECKSTRING,
+		CLASSIC_DECKSTRING,
+		"AAEDAf0EArOWBLWhBA7hlQTilQTllQTmlQTolQShlgTplgT0oAS9oQTVoQSTogSgowS/owTDowQAAA==",
+	].forEach((value, index) => {
+		it(`reencodes deckstring #${index + 1}`, () => {
+			expect(encode(decode(value))).to.equal(value);
+		});
+	});
+
+	it("runs the README.md example", () => {
+		const deck = {
+			cards: [
+				[1, 2],
+				[2, 2],
+				[3, 2],
+				[4, 1],
+			], // [dbfId, count] pairs
+			sideboardCards: [[5, 1, 90749]],
+			heroes: [7], // Garrosh Hellscream
+			format: FormatType.FT_WILD,
+		};
+
+		const deckstring = encode(deck);
+		const decoded = decode(deckstring);
+		expect(JSON.stringify(decoded)).to.equal(JSON.stringify(deck));
+	});
+});
