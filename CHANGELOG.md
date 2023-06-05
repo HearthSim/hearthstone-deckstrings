@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [3.0.0] - 2023-06-05
 ### Added
 - Added support for sideboards  
   *DeckDefinition now accepts an optional sideboardCards paramter of the shape `[dbfId, count, ownerDbfId]`*
@@ -62,7 +64,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix a decoding bug
 
-[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v2.2.1...HEAD
+[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/HearthSim/npm-deckstrings/compare/v2.2.1...v3.0.0
 [2.2.1]: https://github.com/HearthSim/npm-deckstrings/compare/v2.1.0...v2.2.1
 [2.1.0]: https://github.com/HearthSim/npm-deckstrings/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/HearthSim/npm-deckstrings/compare/1.1.0...v2.0.0
