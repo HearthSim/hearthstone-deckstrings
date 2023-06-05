@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Added support for sideboards  
+  *DeckDefinition now accepts an optional sideboardCards paramter of the shape `[dbfId, count, ownerDbfId]`*
 - Added `DeckCard` type  
   *Use `DeckCard[]` over `DeckList` in your code*
 

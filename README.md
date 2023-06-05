@@ -23,12 +23,13 @@ import { encode, decode, FormatType } from "deckstrings";
 
 const deck = {
 	cards: [[1, 2], [2, 2], [3, 2], [4, 1]], // [dbfId, count] pairs
+	sideboardCards: [[5, 1, 90749]], // [dbfId, count, sideboardOwnerDbfId] triplets
 	heroes: [7], // Garrosh Hellscream
 	format: FormatType.FT_WILD, // or FT_STANDARD or FT_CLASSIC
 };
 
 const deckstring = encode(deck);
-console.log(deckstring); // AAEBAQcBBAMBAgMA
+console.log(deckstring); // AAEBAQcBBAMBAgMAAQEF/cQFAAA=
 
 const decoded = decode(deckstring);
 console.log(JSON.stringify(deck) === JSON.stringify(decoded)); // true

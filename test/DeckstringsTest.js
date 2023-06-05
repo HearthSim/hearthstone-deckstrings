@@ -6,9 +6,12 @@ const { expect } = require("chai");
 //#endif
 
 const CANONICAL_DECKSTRING =
-	"AAECAR8GxwPJBLsFmQfZB/gIDI0B2AGoArUDhwSSBe0G6wfbCe0JgQr+DAA=";
+	"AAECAR8GxwPJBLsFmQfZB/gIDI0B2AGoArUDhwSSBe0G6wfbCe0JgQr+DAAA";
 
 const NONCANONICAL_DECKSTRING =
+	"AAECAR8GxwPJBLsFmQfZB/gIDJIF2AGoArUDhwSNAe0G6wfbCe0JgQr+DAAA";
+
+const PRESIDEBOARD_DECKSTRING =
 	"AAECAR8GxwPJBLsFmQfZB/gIDJIF2AGoArUDhwSNAe0G6wfbCe0JgQr+DAA=";
 
 const CANONICAL_DEFINITION = {
@@ -32,6 +35,7 @@ const CANONICAL_DEFINITION = {
 		[1281, 2], // Scavenging Hyena
 		[1662, 2], // Eaglehorn Bow
 	], // pairs of [dbfid, count], by ascending dbfId
+	sideboardCards: [],
 	heroes: [31], // Rexxar
 	format: FormatType.FT_STANDARD, // 1 for Wild, 2 for Standard
 };
@@ -52,7 +56,7 @@ const NONCANONICAL_DEFINITION = Object.assign({}, CANONICAL_DEFINITION, {
 ];
 
 const CLASSIC_DECKSTRING =
-	"AAEDAaa4AwTTlQSvlgT6oASPowQN25UE3JUEppYEsJYEtpYEvZYE1JYE3ZYE6aEE8KEE8aEE86EE1KIEAA==";
+	"AAEDAaa4AwTTlQSvlgT6oASPowQN25UE3JUEppYEsJYEtpYEvZYE1JYE3ZYE6aEE8KEE8aEE86EE1KIEAAA=";
 
 const CLASSIC_DEFINITION = {
 	cards: [
@@ -74,8 +78,48 @@ const CLASSIC_DEFINITION = {
 		[69972, 2],
 		[70031, 1],
 	], // pairs of [dbfid, count], by ascending dbfId
+	sideboardCards: [],
 	heroes: [56358], // Elise Starseeker
 	format: FormatType.FT_CLASSIC, // 1 for Wild, 2 for Standard
+};
+
+const SIDEBOARD_DECKSTRING =
+	"AAEBAZCaBgjlsASotgSX7wTvkQXipAX9xAXPxgXGxwUQvp8EobYElrcE+dsEuNwEutwE9vAEhoMFopkF4KQFlMQFu8QFu8cFuJ4Gz54G0Z4GAAED8J8E/cQFuNkE/cQF/+EE/cQFAAA=";
+
+const SIDEBOARD_DEFINITION = {
+	cards: [
+		[69566, 2],
+		[71781, 1],
+		[72481, 2],
+		[72488, 1],
+		[72598, 2],
+		[77305, 2],
+		[77368, 2],
+		[77370, 2],
+		[79767, 1],
+		[79990, 2],
+		[82310, 2],
+		[84207, 1],
+		[85154, 2],
+		[86624, 2],
+		[86626, 1],
+		[90644, 2],
+		[90683, 2],
+		[90749, 1],
+		[90959, 1],
+		[91067, 2],
+		[91078, 1],
+		[102200, 2],
+		[102223, 2],
+		[102225, 2],
+	],
+	sideboardCards: [
+		[69616, 1, 90749],
+		[76984, 1, 90749],
+		[78079, 1, 90749],
+	],
+	heroes: [101648], // Hedanis
+	format: 1,
 };
 
 describe("encode", () => {
@@ -124,6 +168,22 @@ describe("encode", () => {
 
 		it("returns the expected deckstring", () => {
 			expect(result).to.equal(CLASSIC_DECKSTRING);
+		});
+	});
+
+	describe("with a sideboard deck definition", () => {
+		let result;
+
+		before("encodes without an error", () => {
+			result = encode(SIDEBOARD_DEFINITION);
+		});
+
+		it("returns a string", () => {
+			expect(result).to.be.a("string");
+		});
+
+		it("returns the expected deckstring", () => {
+			expect(result).to.equal(SIDEBOARD_DECKSTRING);
 		});
 	});
 
@@ -323,6 +383,24 @@ describe("decode", () => {
 		});
 	});
 
+	describe("with a pre-sideboard deckstring", () => {
+		let result;
+
+		before("decodes without an error", () => {
+			result = decode(PRESIDEBOARD_DECKSTRING);
+		});
+
+		it("returns an object", () => {
+			expect(result).to.be.a("object");
+		});
+
+		it("returns the expected deck definition", () => {
+			expect(JSON.stringify(result)).to.equal(
+				JSON.stringify(CANONICAL_DEFINITION)
+			);
+		});
+	});
+
 	describe("with a classic deckstring", () => {
 		let result;
 
@@ -337,6 +415,24 @@ describe("decode", () => {
 		it("returns the expected deck definition", () => {
 			expect(JSON.stringify(result)).to.equal(
 				JSON.stringify(CLASSIC_DEFINITION)
+			);
+		});
+	});
+
+	describe("with a sideboard deckstring", () => {
+		let result;
+
+		before("decodes without an error", () => {
+			result = decode(SIDEBOARD_DECKSTRING);
+		});
+
+		it("returns an object", () => {
+			expect(result).to.be.a("object");
+		});
+
+		it("returns the expected deck definition", () => {
+			expect(JSON.stringify(result)).to.equal(
+				JSON.stringify(SIDEBOARD_DEFINITION)
 			);
 		});
 	});
