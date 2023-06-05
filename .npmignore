@@ -1,6 +1,6 @@
 /src/
 /test/
-.travis.yml
+/.github/
 .prettierrc
 .editorconfig
 .gitignore
@@ -8,3 +8,4 @@ tsconfig.js
 rollup.config.js
 karma.conf.js
 yarn.lock
+tsconfig.json
