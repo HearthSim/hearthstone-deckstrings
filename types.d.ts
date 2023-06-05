@@ -7,11 +7,11 @@ export type SideboardCard = [number, number, number]; // [dbfId, count, sideboar
 
 export interface DeckDefinition {
 	cards: DeckCard[];
-	sideboardCards: SideboardCard[];
+	sideboardCards?: SideboardCard[];
 	heroes: number[];
 	format: FormatType;
 }
 
 export function encode(deck: DeckDefinition): string;
 
-export function decode(deckstring: string): DeckDefinition;
+export function decode(deckstring: string): Required<DeckDefinition>;
