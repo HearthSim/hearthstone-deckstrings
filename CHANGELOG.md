@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [3.0.1] - 2023-06-05
 ### Fixed
 - Fixed sideboardCards being required in deckDefinition
 
@@ -66,7 +68,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix a decoding bug
 
-[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/HearthSim/npm-deckstrings/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/HearthSim/npm-deckstrings/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/HearthSim/npm-deckstrings/compare/v2.2.1...v3.0.0
 [2.2.1]: https://github.com/HearthSim/npm-deckstrings/compare/v2.1.0...v2.2.1
 [2.1.0]: https://github.com/HearthSim/npm-deckstrings/compare/v2.0.0...v2.1.0
