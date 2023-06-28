@@ -54,7 +54,8 @@ export function encode(deck: DeckDefinition): string {
 		typeof deck !== "object" ||
 		(deck.format !== FormatType.FT_WILD &&
 			deck.format !== FormatType.FT_STANDARD &&
-			deck.format !== FormatType.FT_CLASSIC) ||
+			deck.format !== FormatType.FT_CLASSIC &&
+			deck.format !== FormatType.FT_TWIST) ||
 		!Array.isArray(deck.heroes) ||
 		!Array.isArray(deck.cards) ||
 		(typeof deck.sideboardCards !== "undefined" &&
@@ -129,7 +130,8 @@ export function decode(deckstring: string): DeckDefinition {
 	if (
 		format !== FormatType.FT_WILD &&
 		format !== FormatType.FT_STANDARD &&
-		format !== FormatType.FT_CLASSIC
+		format !== FormatType.FT_CLASSIC &&
+		format !== FormatType.FT_TWIST
 	) {
 		throw new Error(`Unsupported format ${format} in deckstring`);
 	}
