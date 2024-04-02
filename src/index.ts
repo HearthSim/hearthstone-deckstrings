@@ -21,8 +21,14 @@ function isPositiveNaturalNumber(n: unknown): boolean {
 	return n > 0;
 }
 
-function sort_cards<T extends BaseCard>(cards: T[]): T[] {
-	return cards.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+function sort_cards<T extends BaseCard>(
+	cards: T[],
+	sideboard: boolean = false
+): T[] {
+	if (sideboard) {
+		return cards.sort((a, b) => a[2] - b[2] || a[0] - b[0]) || 0;
+	}
+	return cards.sort((a, b) => a[0] - b[0] || 0);
 }
 
 function trisort_cards<T extends BaseCard>(cards: T[]): [T[], T[], T[]] {
@@ -69,7 +75,7 @@ export function encode(deck: DeckDefinition): string {
 	const format = deck.format;
 	const heroes = deck.heroes.slice().sort();
 	const cards = sort_cards(deck.cards.slice());
-	const sideboard = sort_cards((deck.sideboardCards || []).slice());
+	const sideboard = sort_cards((deck.sideboardCards || []).slice(), true);
 
 	writer.null();
 	writer.varint(DECKSTRING_VERSION);
@@ -165,7 +171,7 @@ export function decode(deckstring: string): DeckDefinition {
 				]);
 			}
 		}
-		sort_cards(sideboardCards);
+		sort_cards(sideboardCards, true);
 	}
 
 	return {
